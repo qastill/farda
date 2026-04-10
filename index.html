@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FARDA — Creative Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0b0b;--card:#141414;--card2:#1a1a1a;--gold:#c8a86e;--gd:rgba(200,168,110,.08);--text:#f0ede6;--dim:rgba(255,255,255,.4);--mu:rgba(255,255,255,.18);--bd:rgba(255,255,255,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;overflow-x:hidden;line-height:1.5}
+body::after{content:'';position:fixed;inset:0;z-index:99999;pointer-events:none;opacity:.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--gold)}
+
+/* ═══ LANDING ═══ */
+#landing{height:100vh;display:grid;grid-template-rows:auto 1fr auto;padding:clamp(20px,3vw,36px);position:relative}
+#landing.off{opacity:0;transform:scale(.97);pointer-events:none;position:absolute;inset:0;transition:all .5s}
+.amb{position:fixed;pointer-events:none;z-index:0;border-radius:50%}
+.a1{width:450px;height:450px;top:-8%;left:-8%;background:radial-gradient(circle,rgba(200,168,110,.035),transparent 70%)}
+.a2{width:350px;height:350px;bottom:-8%;right:-4%;background:radial-gradient(circle,rgba(200,168,110,.025),transparent 70%)}
+.tb{display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;border-bottom:1px solid var(--bd);z-index:2;position:relative}
+.logo{font-family:'Playfair Display',serif;font-size:clamp(16px,1.8vw,22px);font-weight:700;letter-spacing:3px}.logo i{font-style:normal;color:var(--gold)}
+.tl{display:flex;gap:28px}.tl a{color:var(--dim);font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:300;transition:color .3s}.tl a:hover{color:var(--gold)}
+.lc{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:clamp(16px,2.5vh,32px);z-index:2;position:relative}
+.tag{font-size:9px;letter-spacing:6px;text-transform:uppercase;color:var(--mu);font-weight:300}
+.lc h1{font-family:'Playfair Display',serif;font-size:clamp(34px,6vw,80px);font-weight:700;line-height:1.05;letter-spacing:-1px}
+.lc h1 span{color:var(--gold);font-style:italic}
+.gl{width:36px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.ls{font-size:clamp(12px,1.2vw,14px);color:var(--dim);font-weight:200;max-width:400px;line-height:1.7}
+.doors{display:flex;gap:clamp(10px,1.5vw,16px)}
+.door{padding:clamp(14px,1.8vh,20px) clamp(24px,3vw,40px);border:1px solid var(--bd);background:none;font-family:'Outfit',sans-serif;font-size:clamp(10px,.9vw,12px);font-weight:400;letter-spacing:2px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .4s;color:var(--text);position:relative;overflow:hidden}
+.door::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gd),transparent 60%);opacity:0;transition:opacity .4s}
+.door:hover{border-color:rgba(200,168,110,.3);transform:translateY(-2px)}.door:hover::before{opacity:1}
+.di{width:28px;height:28px;border:1px solid rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px}
+.da{color:var(--mu);transition:all .3s}.door:hover .da{color:var(--gold);transform:translateX(3px)}
+.bb{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid var(--bd);z-index:2;position:relative}
+.bb span{font-size:9px;color:var(--mu);letter-spacing:1px}
+.sc{display:flex;gap:20px}.sc a{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--mu);transition:color .3s}.sc a:hover{color:var(--gold)}
+.fi{opacity:0;transform:translateY(12px);animation:fi .7s ease forwards}.f2{animation-delay:.1s}.f3{animation-delay:.2s}.f4{animation-delay:.3s}.f5{animation-delay:.4s}.f6{animation-delay:.5s}
+@keyframes fi{to{opacity:1;transform:translateY(0)}}
+
+/* ═══ INNER PAGES ═══ */
+.pg{display:none;opacity:0;transition:opacity .4s}
+.pg.on{display:block;opacity:1}
+
+/* inner nav */
+.inv{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:12px clamp(16px,3vw,36px);background:rgba(11,11,11,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd)}
+.bk{display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);cursor:pointer;border:none;background:none;font-family:'Outfit',sans-serif;transition:color .3s}.bk:hover{color:var(--gold)}
+.sw{padding:6px 16px;border:1px solid var(--bd);background:none;color:var(--dim);font-family:'Outfit',sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .3s}.sw:hover{border-color:var(--gold);color:var(--gold)}
+
+/* page header - compact */
+.ph{padding:clamp(24px,4vh,48px) clamp(16px,3vw,36px) clamp(16px,2vh,24px);display:flex;justify-content:space-between;align-items:flex-end;gap:24px;border-bottom:1px solid var(--bd)}
+.ph-left{flex:1}
+.ph .tag{margin-bottom:8px}
+.ph h2{font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,44px);font-weight:700;line-height:1.1;letter-spacing:-1px}
+.ph h2 span{color:var(--gold);font-style:italic}
+.ph p{margin-top:8px;font-size:13px;color:var(--dim);max-width:420px;line-height:1.6;font-weight:200}
+.ph-cta{padding:10px 28px;background:var(--gold);color:var(--bg);font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;white-space:nowrap;transition:all .3s;flex-shrink:0}
+.ph-cta:hover{background:#d4b87a}
+
+/* compact content area */
+.cx{padding:clamp(16px,2vh,24px) clamp(16px,3vw,36px)}
+
+/* tabs */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--bd);margin-bottom:clamp(16px,2vh,24px)}
+.tab{padding:10px 20px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);cursor:pointer;border:none;background:none;font-family:'Outfit',sans-serif;border-bottom:2px solid transparent;transition:all .3s;font-weight:400}
+.tab.on{color:var(--gold);border-bottom-color:var(--gold)}
+.tab:hover{color:var(--text)}
+.tp{display:none}.tp.on{display:block}
+
+/* mini cards for courses */
+.mg{display:grid;gap:2px}
+.mg-3{grid-template-columns:repeat(3,1fr)}
+.mg-4{grid-template-columns:repeat(4,1fr)}
+.mg-2{grid-template-columns:repeat(2,1fr)}
+
+.mc{background:var(--card);border:1px solid var(--bd);padding:clamp(16px,1.8vw,24px);transition:all .3s;position:relative;overflow:hidden}
+.mc:hover{border-color:rgba(200,168,110,.15)}
+.mc h4{font-family:'Playfair Display',serif;font-size:clamp(14px,1.2vw,17px);font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.mc h4 .em{font-size:16px}
+.mc>p{font-size:11px;color:var(--dim);line-height:1.6;font-weight:300;margin-bottom:10px}
+
+/* module list inside card */
+.mods{display:flex;flex-direction:column;gap:4px}
+.mod{display:flex;gap:8px;font-size:11px;color:var(--dim);font-weight:300;line-height:1.4}
+.mod b{color:var(--gold);font-weight:500;font-size:10px;letter-spacing:.5px;white-space:nowrap;min-width:44px}
+
+/* section label */
+.sl{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:8px;padding-top:clamp(16px,2vh,24px)}
+.sl::before{content:'';width:16px;height:1px;background:var(--gold)}
+
+/* consult cards */
+.cc{background:var(--card);border:1px solid var(--bd);padding:clamp(14px,1.5vw,20px);transition:all .3s}
+.cc:hover{border-color:rgba(200,168,110,.15)}
+.cc h5{font-family:'Playfair Display',serif;font-size:14px;font-weight:600;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.cc p{font-size:11px;color:var(--dim);line-height:1.5;font-weight:300}
+.cc ul{list-style:none;margin-top:6px;display:flex;flex-wrap:wrap;gap:4px 8px}
+.cc ul li{font-size:10px;color:var(--mu);display:flex;align-items:center;gap:4px}
+.cc ul li::before{content:'◆';font-size:5px;color:var(--gold)}
+
+/* price row */
+.pr{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:clamp(12px,1.5vh,20px)}
+.pc{background:var(--card);border:1px solid var(--bd);padding:clamp(16px,1.8vw,24px);display:flex;flex-direction:column;transition:all .3s;position:relative}
+.pc:hover{border-color:rgba(200,168,110,.15)}
+.pc.ft{border-color:rgba(200,168,110,.12)}
+.pc.ft::after{content:'★';position:absolute;top:12px;right:14px;color:var(--gold);font-size:14px}
+.pc .pn{font-family:'Playfair Display',serif;font-size:16px;font-weight:700}
+.pc .pa{font-family:'Playfair Display',serif;font-size:clamp(22px,2.2vw,30px);font-weight:700;color:var(--gold);margin:6px 0 2px}
+.pc .pa small{font-size:11px;font-weight:300;color:var(--dim)}
+.pc ul{list-style:none;flex:1;margin:8px 0;display:flex;flex-direction:column;gap:3px}
+.pc ul li{font-size:11px;color:var(--dim);font-weight:300;display:flex;align-items:center;gap:6px}
+.pc ul li::before{content:'✦';font-size:7px;color:var(--gold)}
+.pc button{margin-top:auto;padding:10px;text-align:center;border:1px solid var(--bd);background:none;color:var(--text);font-family:'Outfit',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.pc button:hover{border-color:var(--gold);color:var(--gold)}
+.pc.ft button{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+
+/* tools */
+.tstrip{display:flex;gap:2px;flex-wrap:wrap;margin-top:8px}
+.tb2{padding:6px 14px;background:var(--card);border:1px solid var(--bd);font-size:10px;color:var(--dim);font-weight:300;display:flex;align-items:center;gap:6px;transition:all .3s}
+.tb2:hover{border-color:rgba(200,168,110,.15);color:var(--gold)}
+
+/* production service cards */
+.psc{background:var(--card);border:1px solid var(--bd);padding:clamp(16px,1.8vw,24px);transition:all .3s}
+.psc:hover{border-color:rgba(200,168,110,.15)}
+.psc h4{font-family:'Playfair Display',serif;font-size:clamp(15px,1.3vw,18px);font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.psc p{font-size:11px;color:var(--dim);line-height:1.6;font-weight:300;margin-bottom:8px}
+.psc ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:3px 12px}
+.psc ul li{font-size:10px;color:var(--mu);display:flex;align-items:center;gap:4px}
+.psc ul li::before{content:'◆';font-size:5px;color:var(--gold)}
+
+/* footer */
+.ft2{border-top:1px solid var(--bd);padding:16px clamp(16px,3vw,36px);display:flex;justify-content:space-between;align-items:center;font-size:9px;color:var(--mu);letter-spacing:1px}
+
+@media(max-width:1024px){.mg-3{grid-template-columns:1fr 1fr}.mg-4{grid-template-columns:1fr 1fr}.pr{grid-template-columns:1fr}}
+@media(max-width:640px){.doors{flex-direction:column;width:100%;max-width:280px}.door{width:100%}.tl{display:none}.mg-3,.mg-4,.mg-2{grid-template-columns:1fr}.pr{grid-template-columns:1fr}.ph{flex-direction:column;align-items:flex-start}.sw{display:none}.psc ul{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="amb a1"></div><div class="amb a2"></div>
+
+<!-- ═══ LANDING ═══ -->
+<div id="landing">
+  <div class="tb fi"><div class="logo">FARDA<i>.</i></div><div class="tl"><a href="#" onclick="go('ac')">Academy</a><a href="#" onclick="go('ph')">Production</a></div></div>
+  <div class="lc">
+    <p class="tag fi f2">Creative Studio</p>
+    <h1 class="fi f3">Where Ideas<br>Become <span>Reality</span></h1>
+    <div class="gl fi f3"></div>
+    <p class="ls fi f4">Dua lini bisnis — edukasi & konsultasi,<br>dan produksi konten berbasis AI.</p>
+    <div class="doors fi f5">
+      <button class="door" onclick="go('ac')"><span class="di">🎓</span>Academy & Consulting<span class="da">→</span></button>
+      <button class="door" onclick="go('ph')"><span class="di">🎬</span>Production House<span class="da">→</span></button>
+    </div>
+  </div>
+  <div class="bb fi f6"><span>© 2026 FARDA</span><div class="sc"><a href="#">Instagram</a><a href="#">YouTube</a></div></div>
+</div>
+
+<!-- ═══ ACADEMY & CONSULTING ═══ -->
+<div id="ac" class="pg">
+  <nav class="inv"><button class="bk" onclick="home()">← Back</button><div class="logo">FARDA<i>.</i></div><button class="sw" onclick="go('ph')">Production →</button></nav>
+
+  <div class="ph">
+    <div class="ph-left">
+      <p class="tag">Lini 01 — Academy & Consulting</p>
+      <h2>Academy &<br><span>Consulting</span></h2>
+      <p>Pelatihan intensif & konsultasi strategis — kuasai skill kreatif dan AI tools untuk konten yang berdampak.</p>
+    </div>
+    <button class="ph-cta">Free Consultation</button>
+  </div>
+
+  <div class="cx">
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab on" onclick="stab(this,'ac-w')">Workshop</button>
+      <button class="tab" onclick="stab(this,'ac-c')">Consulting</button>
+      <button class="tab" onclick="stab(this,'ac-p')">Pricing</button>
+    </div>
+
+    <!-- TAB: WORKSHOPS -->
+    <div id="ac-w" class="tp on">
+      <div class="mg mg-3">
+
+        <!-- WORKSHOP 1 -->
+        <div class="mc">
+          <h4><span class="em">🎥</span> Video Production</h4>
+          <p>Dari nol hingga mahir produksi video profesional. Workshop 2 hari, praktek langsung.</p>
+          <div class="mods">
+            <div class="mod"><b>Mod 1</b> Dasar sinematografi: rule of thirds, leading lines, depth of field</div>
+            <div class="mod"><b>Mod 2</b> Lighting setup: 3-point lighting, natural light, budget gear</div>
+            <div class="mod"><b>Mod 3</b> Audio recording: lav mic, shotgun, room treatment</div>
+            <div class="mod"><b>Mod 4</b> Shooting practice: interview, B-roll, product shot</div>
+            <div class="mod"><b>Mod 5</b> Editing di DaVinci Resolve: timeline, cut, transition</div>
+            <div class="mod"><b>Mod 6</b> Color grading dasar & export multi-platform</div>
+            <div class="mod"><b>Mod 7</b> Final project: buat 1 video lengkap 60 detik</div>
+          </div>
+        </div>
+
+        <!-- WORKSHOP 2 -->
+        <div class="mc">
+          <h4><span class="em">🤖</span> AI Content Creation</h4>
+          <p>Kuasai tools AI terkini untuk produksi konten 3x lebih cepat. Workshop 2 hari.</p>
+          <div class="mods">
+            <div class="mod"><b>Mod 1</b> Landscape AI 2026: overview tools, kapabilitas, limitasi</div>
+            <div class="mod"><b>Mod 2</b> Prompt engineering: ChatGPT & Claude untuk scripting</div>
+            <div class="mod"><b>Mod 3</b> AI visual: Midjourney, DALL-E, Ideogram untuk thumbnail & asset</div>
+            <div class="mod"><b>Mod 4</b> AI video: Runway ML, Pika, Kling — text-to-video & editing</div>
+            <div class="mod"><b>Mod 5</b> AI voice & music: ElevenLabs, Suno untuk voiceover & BGM</div>
+            <div class="mod"><b>Mod 6</b> Workflow automation: chain tools jadi pipeline produksi</div>
+            <div class="mod"><b>Mod 7</b> Final project: produksi 1 konten end-to-end pakai AI</div>
+          </div>
+        </div>
+
+        <!-- WORKSHOP 3 -->
+        <div class="mc">
+          <h4><span class="em">📱</span> Social Media Mastery</h4>
+          <p>Strategi konten yang proven untuk engagement & konversi. Workshop 1 hari intensif.</p>
+          <div class="mods">
+            <div class="mod"><b>Mod 1</b> Platform landscape: IG, TikTok, YouTube — algorithm 2026</div>
+            <div class="mod"><b>Mod 2</b> Content pillar framework & editorial calendar bulanan</div>
+            <div class="mod"><b>Mod 3</b> Reels & Shorts: hook, pacing, CTA, trending format</div>
+            <div class="mod"><b>Mod 4</b> Copywriting: caption, hashtag strategy, CTA formula</div>
+            <div class="mod"><b>Mod 5</b> Analytics: metrics yang penting, tracking, optimization</div>
+            <div class="mod"><b>Mod 6</b> Paid ads fundamentals: Meta Ads, TikTok Ads setup</div>
+          </div>
+        </div>
+
+        <!-- WORKSHOP 4 -->
+        <div class="mc">
+          <h4><span class="em">🎨</span> Visual Branding</h4>
+          <p>Bangun identitas visual brand yang konsisten. Workshop 1 hari.</p>
+          <div class="mods">
+            <div class="mod"><b>Mod 1</b> Brand identity: logo, typography, color palette selection</div>
+            <div class="mod"><b>Mod 2</b> Design tools: Canva Pro & Figma untuk non-designer</div>
+            <div class="mod"><b>Mod 3</b> Template system: feed grid, stories, highlight covers</div>
+            <div class="mod"><b>Mod 4</b> Photo direction: style guide, moodboard, brand photo</div>
+            <div class="mod"><b>Mod 5</b> Brand guideline document: buat dari nol</div>
+          </div>
+        </div>
+
+        <!-- WORKSHOP 5 -->
+        <div class="mc">
+          <h4><span class="em">✍️</span> Storytelling & Copy</h4>
+          <p>Seni narasi brand dan menulis copy yang mengkonversi. Workshop 1 hari.</p>
+          <div class="mods">
+            <div class="mod"><b>Mod 1</b> Brand story framework: origin, mission, hero's journey</div>
+            <div class="mod"><b>Mod 2</b> Hook formula: 12 jenis hook yang proven viral</div>
+            <div class="mod"><b>Mod 3</b> Script writing: struktur video 30s, 60s, 3min</div>
+            <div class="mod"><b>Mod 4</b> Landing page copy: headline, benefit, social proof, CTA</div>
+            <div class="mod"><b>Mod 5</b> AI-assisted writing: gunakan Claude/GPT sebagai co-writer</div>
+          </div>
+        </div>
+
+        <!-- WORKSHOP 6 -->
+        <div class="mc">
+          <h4><span class="em">📊</span> Data-Driven Marketing</h4>
+          <p>Baca data dan optimalkan strategi berdasarkan metrics. Workshop 1 hari.</p>
+          <div class="mods">
+            <div class="mod"><b>Mod 1</b> KPI setting: awareness, engagement, conversion metrics</div>
+            <div class="mod"><b>Mod 2</b> Google Analytics 4: setup, dashboard, interpretation</div>
+            <div class="mod"><b>Mod 3</b> Meta & TikTok Insights: audience, reach, performance</div>
+            <div class="mod"><b>Mod 4</b> A/B testing: framework, tools, statistik sederhana</div>
+            <div class="mod"><b>Mod 5</b> ROI calculation & reporting template (Sheets/Looker)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: CONSULTING -->
+    <div id="ac-c" class="tp">
+      <div class="mg mg-2" style="gap:2px">
+        <div class="cc">
+          <h5>🧭 Brand Strategy</h5>
+          <p>Audit menyeluruh & roadmap strategis — dari positioning hingga go-to-market.</p>
+          <ul><li>Brand audit & SWOT</li><li>Competitive mapping</li><li>Positioning & messaging</li><li>Audience profiling</li><li>Visual identity direction</li><li>Quarterly review</li></ul>
+        </div>
+        <div class="cc">
+          <h5>📋 Content Strategy</h5>
+          <p>Rancang ekosistem konten yang terstruktur, konsisten, dan menghasilkan ROI.</p>
+          <ul><li>Content audit & gap analysis</li><li>Pillar development</li><li>Calendar 3–6 bulan</li><li>Production SOP</li><li>Team structure</li><li>Monthly review</li></ul>
+        </div>
+        <div class="cc">
+          <h5>🚀 Digital Transformation</h5>
+          <p>Modernisasi workflow kreatif tim Anda dengan AI tools dan sistem efisien.</p>
+          <ul><li>Workflow assessment</li><li>AI tools setup</li><li>Team onboarding</li><li>SOP & template</li><li>Automation pipeline</li><li>3-month support</li></ul>
+        </div>
+        <div class="cc">
+          <h5>🎯 1-on-1 Mentoring</h5>
+          <p>Personal mentoring untuk creator, freelancer, atau founder naik level.</p>
+          <ul><li>Personal brand dev</li><li>Portfolio review</li><li>Career roadmap</li><li>Weekly accountability</li><li>Skill gap analysis</li><li>Network access</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: PRICING -->
+    <div id="ac-p" class="tp">
+      <div class="pr">
+        <div class="pc">
+          <div class="pn">Starter</div>
+          <div class="pa">5jt <small>/ workshop</small></div>
+          <ul>
+            <li>1 topik workshop pilihan</li>
+            <li>1 hari, max 15 peserta</li>
+            <li>Materi & template digital</li>
+            <li>Sertifikat peserta</li>
+            <li>Q&A support 7 hari</li>
+          </ul>
+          <button>Hubungi Kami</button>
+        </div>
+        <div class="pc ft">
+          <div class="pn">Growth</div>
+          <div class="pa">15jt <small>/ bulan</small></div>
+          <ul>
+            <li>Consulting retainer (min 3 bln)</li>
+            <li>4x sesi konsultasi / bulan</li>
+            <li>Editorial calendar bulanan</li>
+            <li>AI tools setup & training</li>
+            <li>Content review & feedback</li>
+            <li>WhatsApp priority support</li>
+          </ul>
+          <button>Hubungi Kami</button>
+        </div>
+        <div class="pc">
+          <div class="pn">Enterprise</div>
+          <div class="pa">Custom</div>
+          <ul>
+            <li>Multi-workshop program</li>
+            <li>Full strategy + transformation</li>
+            <li>Dedicated consultant</li>
+            <li>Team mentoring program</li>
+            <li>Quarterly business review</li>
+            <li>24/7 support channel</li>
+          </ul>
+          <button>Hubungi Kami</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ft2"><span>© 2026 FARDA</span><div class="sc"><a href="#">IG</a><a href="#">YT</a></div></div>
+</div>
+
+<!-- ═══ PRODUCTION HOUSE ═══ -->
+<div id="ph" class="pg">
+  <nav class="inv"><button class="bk" onclick="home()">← Back</button><div class="logo">FARDA<i>.</i></div><button class="sw" onclick="go('ac')">Academy →</button></nav>
+
+  <div class="ph">
+    <div class="ph-left">
+      <p class="tag">Lini 02 — Production House</p>
+      <h2>Production<br><span>House</span></h2>
+      <p>Produksi konten visual premium — iklan, profil, music video & tutorial. Semua diperkuat AI.</p>
+    </div>
+    <button class="ph-cta">Request Proposal</button>
+  </div>
+
+  <div class="cx">
+    <div class="tabs">
+      <button class="tab on" onclick="stab(this,'ph-s')">Services</button>
+      <button class="tab" onclick="stab(this,'ph-a')">AI & Tools</button>
+      <button class="tab" onclick="stab(this,'ph-p')">Pricing</button>
+    </div>
+
+    <!-- TAB: SERVICES -->
+    <div id="ph-s" class="tp on">
+      <div class="mg mg-2" style="gap:2px">
+        <!-- ADVERTISEMENT -->
+        <div class="psc">
+          <h4>📺 Advertisement</h4>
+          <p>Iklan komersial full-service — dari konsep kreatif hingga delivery multi-platform.</p>
+          <ul>
+            <li>TVC (Television Commercial)</li>
+            <li>YouTube & Meta Video Ads</li>
+            <li>TikTok & Reels Ads</li>
+            <li>Product Commercial</li>
+            <li>Testimonial / UGC-style</li>
+            <li>AI motion graphics</li>
+            <li>Multi-format (16:9, 9:16, 1:1)</li>
+            <li>A/B creative variants</li>
+          </ul>
+        </div>
+        <!-- COMPANY PROFILE -->
+        <div class="psc">
+          <h4>🏢 Company Profile</h4>
+          <p>Video profil yang membuat brand story Anda hidup dan berkesan bagi stakeholder.</p>
+          <ul>
+            <li>Corporate overview video</li>
+            <li>Product / service showcase</li>
+            <li>Brand story documentary</li>
+            <li>Factory / facility tour</li>
+            <li>CSR & sustainability</li>
+            <li>Drone aerial shot</li>
+            <li>Multi-language subtitle</li>
+            <li>Investor pitch video</li>
+          </ul>
+        </div>
+        <!-- MUSIC VIDEO -->
+        <div class="psc">
+          <h4>🎵 Music Video</h4>
+          <p>Visualisasi musik ikonik — dari narrative MV hingga AI-enhanced visual experience.</p>
+          <ul>
+            <li>Concept & storyline dev</li>
+            <li>Performance video</li>
+            <li>Narrative / cinematic MV</li>
+            <li>AI-generated VFX</li>
+            <li>Lyric video & visualizer</li>
+            <li>Cinema color grading</li>
+            <li>BTS content</li>
+            <li>YouTube & Spotify optimized</li>
+          </ul>
+        </div>
+        <!-- TUTORIAL -->
+        <div class="psc">
+          <h4>🎓 Tutorial & Edukasi</h4>
+          <p>Produksi konten tutorial dan e-learning profesional untuk platform Anda.</p>
+          <ul>
+            <li>Online course production</li>
+            <li>YouTube series content</li>
+            <li>AI tutorial step-by-step</li>
+            <li>Screen recording & demo</li>
+            <li>Explainer animation</li>
+            <li>Multi-camera studio</li>
+            <li>LMS-ready delivery</li>
+            <li>Thumbnail & SEO optimization</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: AI & TOOLS -->
+    <div id="ph-a" class="tp">
+      <div class="mg mg-4" style="gap:2px;margin-bottom:16px">
+        <div class="mc">
+          <h4><span class="em">✏️</span> Pre-Production</h4>
+          <div class="mods">
+            <div class="mod"><b>AI</b> Script & concept generation via LLM</div>
+            <div class="mod"><b>AI</b> Storyboard auto-generation (Midjourney)</div>
+            <div class="mod"><b>AI</b> Mood board curation dari referensi</div>
+            <div class="mod"><b>AI</b> Shot list & schedule optimizer</div>
+          </div>
+        </div>
+        <div class="mc">
+          <h4><span class="em">🎬</span> Production</h4>
+          <div class="mods">
+            <div class="mod"><b>AI</b> Assisted framing & composition</div>
+            <div class="mod"><b>AI</b> Real-time exposure monitoring</div>
+            <div class="mod"><b>AI</b> Auto scene logging & tagging</div>
+            <div class="mod"><b>AI</b> Smart audio level detection</div>
+          </div>
+        </div>
+        <div class="mc">
+          <h4><span class="em">✂️</span> Post-Production</h4>
+          <div class="mods">
+            <div class="mod"><b>AI</b> Auto-cut, rough assembly</div>
+            <div class="mod"><b>AI</b> Color matching & LUT generation</div>
+            <div class="mod"><b>AI</b> Noise reduction & 4K upscale</div>
+            <div class="mod"><b>AI</b> Auto subtitle & translation</div>
+          </div>
+        </div>
+        <div class="mc">
+          <h4><span class="em">🎨</span> Visual Effects</h4>
+          <div class="mods">
+            <div class="mod"><b>AI</b> Background generation & replace</div>
+            <div class="mod"><b>AI</b> Generative scene extension</div>
+            <div class="mod"><b>AI</b> Motion graphics from prompt</div>
+            <div class="mod"><b>AI</b> Style transfer & look dev</div>
+          </div>
+        </div>
+      </div>
+      <div class="sl">Tools We Use</div>
+      <div class="tstrip">
+        <div class="tb2">🎯 Runway ML</div>
+        <div class="tb2">🎨 Midjourney</div>
+        <div class="tb2">🗣️ ElevenLabs</div>
+        <div class="tb2">✂️ DaVinci Resolve</div>
+        <div class="tb2">🎵 Suno AI</div>
+        <div class="tb2">📝 Claude / GPT</div>
+        <div class="tb2">🖼️ Stable Diffusion</div>
+        <div class="tb2">🎞️ Premiere Pro</div>
+        <div class="tb2">🎭 After Effects</div>
+        <div class="tb2">📸 Pika / Kling</div>
+      </div>
+    </div>
+
+    <!-- TAB: PRICING -->
+    <div id="ph-p" class="tp">
+      <div class="pr">
+        <div class="pc">
+          <div class="pn">Starter</div>
+          <div class="pa">15jt <small>/ project</small></div>
+          <ul>
+            <li>1 video max 60 detik</li>
+            <li>1 hari shooting</li>
+            <li>Script & storyboard</li>
+            <li>Professional editing</li>
+            <li>Basic color grading</li>
+            <li>Licensed music</li>
+            <li>2 format delivery</li>
+            <li>2x revisi</li>
+          </ul>
+          <button>Hubungi Kami</button>
+        </div>
+        <div class="pc ft">
+          <div class="pn">Premium</div>
+          <div class="pa">45jt <small>/ project</small></div>
+          <ul>
+            <li>1 video max 3 menit</li>
+            <li>2 hari shooting</li>
+            <li>Full script & AI storyboard</li>
+            <li>Drone & multi-camera</li>
+            <li>Cinema color grading</li>
+            <li>AI-enhanced VFX</li>
+            <li>All format + 3 social cuts</li>
+            <li>3x revisi</li>
+          </ul>
+          <button>Hubungi Kami</button>
+        </div>
+        <div class="pc">
+          <div class="pn">Signature</div>
+          <div class="pa">Custom</div>
+          <ul>
+            <li>Multi-video campaign</li>
+            <li>Unlimited shooting</li>
+            <li>Full creative direction</li>
+            <li>Talent & casting</li>
+            <li>Advanced VFX & CGI</li>
+            <li>Sound design & foley</li>
+            <li>BTS content package</li>
+            <li>Unlimited revisi</li>
+          </ul>
+          <button>Hubungi Kami</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ft2"><span>© 2026 FARDA</span><div class="sc"><a href="#">IG</a><a href="#">YT</a></div></div>
+</div>
+
+<script>
+function go(id){
+  document.getElementById('landing').classList.add('off');
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  setTimeout(()=>{
+    document.getElementById(id).classList.add('on');
+    window.scrollTo({top:0,behavior:'instant'});
+  },250);
+}
+function home(){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  setTimeout(()=>{
+    const l=document.getElementById('landing');
+    l.classList.remove('off');
+    l.style.position='relative';
+    window.scrollTo({top:0,behavior:'instant'});
+  },150);
+}
+function stab(btn,id){
+  const parent=btn.closest('.cx');
+  parent.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  parent.querySelectorAll('.tp').forEach(t=>t.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById(id).classList.add('on');
+}
+</script>
+</body>
+</html>
